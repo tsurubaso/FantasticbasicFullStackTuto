@@ -24,3 +24,7 @@ app.get('/getAll', (req, res) =>{
 
 
 //delete
+
+app.listen(process.env.PORT, () => {
+    console.log('app is running');
+});
