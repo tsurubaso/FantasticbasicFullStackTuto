@@ -1,0 +1,13 @@
+{
+  "name": "fantasticbasicfullstacktuto",
+  "version": "1.0.0",
+  "description": " this tuto https://www.youtube.com/watch?v=vrj9AohVhPA",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server.js"
+  },
+  "keywords": [],
+  "author": "tsurubari",
+  "license": "ISC"
+}
