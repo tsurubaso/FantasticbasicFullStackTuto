@@ -18,7 +18,7 @@ const db = dbService.getDbServiceInstance();
 const result = db.insertNewName(name)
 
 result
-.then((data) => res.json({success:true}))
+.then((data) => res.json({data:data}))
 .catch(err=> console.log(err));
 
 

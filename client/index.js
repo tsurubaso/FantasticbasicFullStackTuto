@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const addBtn = document.querySelector("#add-name-btn");
+const deleteBtn = document.querySelector("#delete-name-btn"); 
 addBtn.onclick = function () {
   const nameInput = document.querySelector("#name-input");
   const name = nameInput.value;
@@ -18,7 +19,35 @@ addBtn.onclick = function () {
     .then((data) => insertRowIntoTable(data["data"]));
 };
 
-function insertRowIntoTable(data) {}
+function insertRowIntoTable(data) {
+
+const table=document.querySelector("table tbody");
+//const isTableData = table.querySelector(".no-data");
+let tableHtml=`<tr>`;
+
+for(var key in data){
+  if(data.hasOwnProperty(key)){
+    if(key==='dateAdded'){
+      data[key]=new Date(data[key]).toLocaleDateString();//y a un prob ici
+    }
+
+tableHtml+= `<td>${data[key]}</td>`;
+
+  }
+}
+ 
+tableHtml += `<td><button class="delete-row-btn" data-id=${data.id}>Delete</button></td>`;
+tableHtml += `<td><button class="edit-row-btn" data-id=${data.id}>Edit</button></td>`;
+tableHtml += `</tr>`;
+}
+
+
+/*if(isTableData){
+  table.innerHTML=tableHtml;
+}else{
+  const newRow = table.insertRow();
+  newRow.innerHTML = tableHtml;
+}*/
 
 function loadHTMLTable(data) {
   const table = document.querySelector("table tbody");

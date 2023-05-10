@@ -54,7 +54,15 @@ class DbService {
           });
         });
         console.log(insertId);
-       // return insertId;
+        return {
+          id: insertId,
+          name: name,
+          dateAdded: dateAdded,
+        }
+      
+      
+      
+      
       } catch (error) {
         console.error(error.message);
         
