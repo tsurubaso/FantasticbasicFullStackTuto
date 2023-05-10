@@ -10,10 +10,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//create
+//create 
 app.post("/insert", (req, res) => {
-
+const{name}=req.body;
 console.log("req.body: ", req.body);
+const db = dbService.getDbServiceInstance();
+const result = db.insertNewName(name)
+
+result
+.then((data) => res.json({success:true}))
+.catch(err=> console.log(err));
+
 
 });
 
