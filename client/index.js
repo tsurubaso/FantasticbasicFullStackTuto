@@ -8,7 +8,13 @@ document.querySelector('table tbody').addEventListener("click", function (e) {
 
 if (e.target.classList.contains("delete-row-btn")) {
   deleteRowById(e.target.dataset.id)}
+
+if (e.target.classList.contains("edit-row-btn")) {
+  handleEditRow(e.target.dataset.id)}
+
 })
+
+const updateBtn = document.querySelector('#update-row-btn')
 
 function deleteRowById(id){
 fetch(`http://localhost:5000/delete/${id}`, {
@@ -25,6 +31,40 @@ if(data.success){
 }
 
 
+
+function handleEditRow(id) { 
+
+const updateSection = document.querySelector('#update-row');
+updateSection.hidden=false; 
+
+document.querySelector('#update-row-btn').dataset.id = id;
+
+}
+
+
+
+updateBtn.onclick=function(){
+  const updatedNameInput =document.querySelector('#update-name-input');
+
+  fetch(`http://localhost:5000/update`,{
+method:"patch",
+headers: {
+   'Content-Type': 'application/json'
+},
+body: JSON.stringify({id:updatedNameInput.dataset.id,
+  name:updatedNameInput.value})})
+  .then(response=>response.json())
+  .then(data=>{
+
+    if(data.success){
+      location.reload()
+    }
+  })
+
+
+
+
+};
 
 
 
