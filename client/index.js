@@ -37,7 +37,7 @@ function handleEditRow(id) {
 const updateSection = document.querySelector('#update-row');
 updateSection.hidden=false; 
 
-document.querySelector('#update-row-btn').dataset.id = id;
+document.querySelector('#update-name-input').dataset.id = id;
 
 }
 
@@ -47,11 +47,12 @@ updateBtn.onclick=function(){
   const updatedNameInput =document.querySelector('#update-name-input');
 
   fetch(`http://localhost:5000/update`,{
-method:"patch",
+method:"PATCH",
 headers: {
    'Content-Type': 'application/json'
 },
-body: JSON.stringify({id:updatedNameInput.dataset.id,
+body: JSON.stringify({
+  id : updatedNameInput.dataset.id,
   name:updatedNameInput.value})})
   .then(response=>response.json())
   .then(data=>{
@@ -70,6 +71,16 @@ body: JSON.stringify({id:updatedNameInput.dataset.id,
 
 
 const addBtn = document.querySelector("#add-name-btn");
+const searchBtn = document.querySelector("#search-btn");
+
+searchBtn.onclick=function(){
+  const searchValue= document.querySelector('#search-input').value;
+  fetch("http://localhost:5000/search/"+searchValue)
+  .then((response) => response.json())
+  .then((data) => loadHTMLTable(data["data"]));
+
+};
+
 
 //const deleteBtn = document.querySelector("#delete-name-btn"); 
 //we can't add this, it,s not existing for sure yet

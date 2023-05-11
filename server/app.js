@@ -46,7 +46,7 @@ app.patch("/update", (req, res) => {
   const result =db.updateNameById(id, name);
 
   result
-  .then((data) => res.json({success:true}))
+  .then(data => res.json({success:data}))
   .catch(err=> console.log(err));
 
 
@@ -70,10 +70,26 @@ const db = dbService.getDbServiceInstance();
 const result =db.deleteRowById(id);
 
 result
-.then((data) => res.json({success:true}))
+.then((data) => res.json({success:data}))
 .catch(err=> console.log(err));
 })
 
+
+app.get('/search/:name', (req, res) => {
+
+  const {name}= req.params;
+
+  const db = dbService.getDbServiceInstance();
+
+  const result =db.searchByName(name);
+
+result
+.then((data) => res.json({data:data}))
+.catch(err=> console.log(err));
+
+
+
+})
 
 
 

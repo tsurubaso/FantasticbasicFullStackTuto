@@ -93,8 +93,8 @@ async updateNameById(id, name) {
         resolve(result.affectedRows);
       });
     });
-   
-    return response === 1? true : false;
+    
+    return response === 1 ? true : false;
   } catch (error) {
     console.log(error);
     return false;
@@ -105,9 +105,24 @@ async updateNameById(id, name) {
 
 }
 
+async searchByName(name) {
 
 
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const query = "SELECT * FROM names WHERE name = ? ";
+      connection.query(query,[name], (err, result) => {
+        if (err) reject(new Error(err.message));
+        resolve(result);
+      });
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 
+}
 
 
 
