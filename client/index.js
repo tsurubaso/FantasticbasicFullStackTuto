@@ -4,9 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => loadHTMLTable(data["data"]));
 });
 
+document.querySelector('table tbody').addEventListener("click", function (e) {
+
+if (e.target.classList.contains("delete-row-btn")) {
+  deleteRowById(e.target.dataset.id)}
+})
+
+function deleteRowById(id){
+fetch(`http://localhost:5000/delete/${id}`, {
+  method: "DELETE"
+})
+.then((response) => response.json())
+.then((data)=>{
+
+if(data.success){
+  location.reload();}
+
+}
+);
+}
+
+
+
+
+
+
 const addBtn = document.querySelector("#add-name-btn");
 
-const deleteBtn = document.querySelector("#delete-name-btn"); 
+//const deleteBtn = document.querySelector("#delete-name-btn"); 
+//we can't add this, it,s not existing for sure yet
 
 addBtn.onclick = function () {
   const nameInput = document.querySelector("#name-input");
